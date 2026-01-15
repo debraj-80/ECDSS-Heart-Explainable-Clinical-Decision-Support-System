@@ -44,9 +44,20 @@ The ROC analysis confirms the ensemble's superior capability in discriminating b
 
 ---
 
-## 📂 Dataset Architecture
-To ensure the framework is globally applicable, this project utilizes an integrated repository from the **UCI Machine Learning Repository**, aggregating four primary cohorts: **Cleveland**, **Hungarian**, **Switzerland**, and **VA Long Beach**.
+## 📂 Dataset Architecture & Diversity
+To ensure global applicability and mitigate population bias, **ECDSS-Heart** integrates data from the **UCI Machine Learning Repository**, aggregating four primary international cohorts.
 
+### **Data Integration Pipeline**
+* **Multi-Source Cohorts**: Combined datasets from Cleveland, Hungarian, Switzerland, and VA Long Beach to ensure a diverse clinical representation.
+* **Missing Data Strategy**: Utilized **Median Imputation** for physiological measurements to preserve the central tendency and distribution integrity of the clinical data.
+* **Class Balancing**: Implemented a hybrid **SMOTE-Tomek** approach to resolve class imbalance while cleaning decision boundaries for better model generalization.
+
+| Dataset Source | Geographic Focus | Official Access |
+| :--- | :--- | :--- |
+| **Cleveland** | United States (Primary) | [UCI Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease) |
+| **Hungarian** | Europe (Regional) | [UCI Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease) |
+| **Switzerland** | Europe (Multicenter) | [UCI Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease) |
+| **VA Long Beach** | United States (Veterans) | [UCI Repository](https://archive.ics.uci.edu/ml/datasets/heart+disease) |
 
 
 ---
