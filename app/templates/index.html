@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECDSS-Heart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .disclaimer {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .lower-risk {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        .higher-risk {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>ECDSS-Heart</h1>
+    <h2>Explainable Clinical Decision Support System</h2>
+    
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> This application is a research/educational machine-learning 
+        prototype and is NOT a medical diagnostic tool. Predictions should not be used as a 
+        substitute for professional medical advice.
+    </div>
+    
+    <form id="predictionForm">
+        <div class="form-group">
+            <label for="age">Age (years):</label>
+            <input type="number" id="age" name="age" min="1" max="120" value="55" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex">
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="cp">Chest Pain Type:</label>
+            <select id="cp" name="cp">
+                <option value="0">Typical Angina</option>
+                <option value="1">Atypical Angina</option>
+                <option value="2">Non-anginal Pain</option>
+                <option value="3">Asymptomatic</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="trestbps">Resting Blood Pressure (mm Hg):</label>
+            <input type="number" id="trestbps" name="trestbps" min="80" max="250" value="130" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="chol">Serum Cholesterol (mg/dl):</label>
+            <input type="number" id="chol" name="chol" min="100" max="600" value="250" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="fbs">Fasting Blood Sugar > 120 mg/dl:</label>
+            <select id="fbs" name="fbs">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="restecg">Resting ECG Results:</label>
+            <select id="restecg" name="restecg">
+                <option value="0">Normal</option>
+                <option value="1">ST-T Wave Abnormality</option>
+                <option value="2">Left Ventricular Hypertrophy</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="thalach">Maximum Heart Rate:</label>
+            <input type="number" id="thalach" name="thalach" min="60" max="220" value="150" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="exang">Exercise-Induced Angina:</label>
+            <select id="exang" name="exang">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="oldpeak">ST Depression (oldpeak):</label>
+            <input type="number" id="oldpeak" name="oldpeak" min="0" max="10" step="0.1" value="1.0" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="slope">Slope of Peak Exercise ST Segment:</label>
+            <select id="slope" name="slope">
+                <option value="0">Upsloping</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="ca">Number of Major Vessels (0-3):</label>
+            <select id="ca" name="ca">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="thal">Thalassemia:</label>
+            <select id="thal" name="thal">
+                <option value="0">Normal</option>
+                <option value="1">Fixed Defect</option>
+                <option value="2">Reversible Defect</option>
+                <option value="3">Unknown</option>
+            </select>
+        </div>
+        
+        <button type="submit">Predict Risk</button>
+    </form>
+    
+    <div id="result" class="result" style="display: none;"></div>
+    
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // This would normally call the Flask backend
+            // For now, display a placeholder message
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p>Please run the Streamlit application for full functionality:</p><code>streamlit run app/app.py</code>';
+        });
+    </script>
+</body>
+</html>
