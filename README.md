@@ -7,7 +7,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-ff4b4b?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> 🚀 **[ECDSS-Heart · Streamlit](https://ecdss-heart.streamlit.app/)**
+> 🚀 **[Live App](https://ecdss-heart.streamlit.app/)**
 
 A research and educational machine-learning prototype that predicts heart disease risk using the UCI Heart Disease dataset and provides model explanations using SHAP and DiCE.
 
